@@ -1,13 +1,15 @@
-
 pub fn parse(input: &str) -> Vec<i32> {
-    input.lines().map(|line| line.parse::<i32>().unwrap()).collect()
+    input
+        .lines()
+        .map(|line| line.parse::<i32>().unwrap())
+        .collect()
 }
 
 pub fn part1(input: &[i32]) -> i32 {
     for first in input {
         for second in input {
             if first + second == 2020 {
-                return first * second
+                return first * second;
             }
         }
     }
@@ -19,7 +21,7 @@ pub fn part2(input: &[i32]) -> i32 {
         for second in input {
             for third in input {
                 if first + second + third == 2020 {
-                    return first * second * third
+                    return first * second * third;
                 }
             }
         }
@@ -31,7 +33,7 @@ pub fn part2(input: &[i32]) -> i32 {
 mod tests {
     use super::*;
     #[test]
-    fn run() {
+    fn run01() {
         let input = include_str!("./input.txt");
         let parsed = parse(input);
         println!("{:?}", part1(&parsed));
