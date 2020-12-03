@@ -21,7 +21,7 @@ fn calculate(input: &[&str], right: usize, down: usize) -> u64 {
         .filter(|(i, &_str)| i % down == 0)
         .enumerate()
         .map(|(i, (_, &str))| {
-            if str.chars().cycle().nth(i * right).unwrap_or(' ') == '#' {
+            if str.chars().nth((i * right) % str.len()).unwrap_or(' ') == '#' {
                 1
             } else {
                 0
