@@ -8,7 +8,7 @@ pub fn parse_row(row: &str) -> Pass {
     row.chars().map(|c| matches!(c, 'B' | 'R')).collect()
 }
 
-pub fn identify_seat(pass: &Pass) -> (u32, u32) {
+pub fn identify_seat(pass: &[bool]) -> (u32, u32) {
     (binary(&pass[0..7], 0, 127), binary(&pass[7..10], 0, 7))
 }
 
@@ -25,7 +25,7 @@ fn binary(directions: &[bool], lower: u32, upper: u32) -> u32 {
 pub fn part1(input: &[Pass]) -> u32 {
     input
         .iter()
-        .map(identify_seat)
+        .map(|v| identify_seat(v))
         .map(|(row, column)| row * 8 + column)
         .max()
         .unwrap()
@@ -34,7 +34,7 @@ pub fn part1(input: &[Pass]) -> u32 {
 pub fn part2(input: &[Pass]) -> u32 {
     let mut seats: Vec<_> = input
         .iter()
-        .map(identify_seat)
+        .map(|v| identify_seat(v))
         .map(|(row, column)| row * 8 + column)
         .collect();
 
